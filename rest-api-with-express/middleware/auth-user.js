@@ -2,7 +2,7 @@
 
 const auth = require('basic-auth');
 const { User } = require('../models');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 exports.authenticateUser = async (req, res, next) => {
     let message;
@@ -30,6 +30,7 @@ exports.authenticateUser = async (req, res, next) => {
     if(message) {
         console.warn(message);
         res.status(401).json({ message: 'Access Denied' })
+    } else {
+        next();
     }
-    next();
 }
