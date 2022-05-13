@@ -1,22 +1,10 @@
 const express = require('express');
 const { User } = require('./models');
 const { Course } = require('./models');
-const {authenticateUser} = require('./middlware/authenticateUser');
+const {authenticateUser} = require('./middlware/auth-user');
 const { async } = require('seed/lib/seed');
 
 const router = express.Router;
-
-// asyncHandler function to wrap each route/middleware
-function asyncHandler(cb) {
-    return async(req, res, next) => {
-        try {
-            await cb(req, res, next)
-        } catch(error) {
-            res.status(500).send(error);
-            next(error);
-        }
-    }
-}
 
 // User Routes
 // A route that will GET all properties and values for the user with a 200 status code
