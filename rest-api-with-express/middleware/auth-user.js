@@ -19,18 +19,17 @@ exports.authenticateUser = async (req, res, next) => {
                 console.log(`Authentication successfull for user: ${user.emailAddress}`);
                 req.currentUser = user;
             } else {
-                message = `Authentication failed for user: ${user.emailAddress}`;
+                message = `Authentication failed for ${user.emailAddress}`;
             }
         } else {
-            message: `User ${credentials.name} was not found`;
+            message = `User ${credentials.name} was not found`;
         }
     } else {
-        message: `Login required for this route`;
+        message = 'Login required for this route';
     }
     if(message) {
         console.warn(message);
         res.status(401).json({ message: 'Access Denied' })
-    } else {
-        next();
-    }
+    } 
+    next();
 }
